@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimaNow | Consulta de Clima</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #101b3c, #254b78);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #c5d6ed;
+            font-size: 14px;
+        }
+
+        .search {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            flex: 1;
+            min-width: 0;
+            padding: 14px;
+            border: none;
+            outline: none;
+            border-radius: 12px;
+            font-size: 15px;
+        }
+
+        button {
+            border: none;
+            padding: 0 18px;
+            border-radius: 12px;
+            background: #48b4f5;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #2399df;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+            transform: none;
+        }
+
+        .weather {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .weather h2 {
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        .icon {
+            font-size: 75px;
+            margin: 10px 0;
+        }
+
+        .temperature {
+            font-size: 65px;
+            font-weight: bold;
+        }
+
+        .description {
+            color: #d0e4f8;
+            margin-top: 8px;
+            font-size: 17px;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .detail-card {
+            background: rgba(255,255,255,0.12);
+            padding: 17px;
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .detail-card span {
+            display: block;
+            font-size: 13px;
+            color: #c5d6ed;
+            margin-bottom: 8px;
+        }
+
+        .detail-card strong {
+            font-size: 19px;
+        }
+
+        #message {
+            text-align: center;
+            color: #ffcf87;
+            font-size: 14px;
+            margin-top: 15px;
+            min-height: 18px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #a9c3df;
+            font-size: 12px;
+        }
+
+        @media (max-width: 400px) {
+            .container {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 27px;
+            }
+
+            .temperature {
+                font-size: 55px;
+            }
+
+            button {
+                padding: 0 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <header>
+            <h1>🌤️ ClimaNow</h1>
+            <p>Descubra como está o clima na sua cidade</p>
+        </header>
+
+        <form class="search" id="searchForm">
+            <input
+                type="text"
+                id="cityInput"
+                placeholder="Digite uma cidade..."
+                aria-label="Nome da cidade"
+                required
+            >
+            <button type="submit" id="searchButton">
+                Buscar
+            </button>
+        </form>
+
+        <section class="weather" aria-live="polite">
+
+            <h2 id="cityName">São Paulo, Brasil</h2>
+
+            <div class="icon" id="weatherIcon">🌤️</div>
+
+            <div class="temperature" id="temperature">
+                --°
+            </div>
+
+            <p class="description" id="description">
+                Pesquise uma cidade para começar
+            </p>
+
+        </section>
+
+        <section class="details">
+
+            <div class="detail-card">
+                <span>💧 Umidade</span>
+                <strong id="humidity">--%</strong>
+            </div>
+
+            <div class="detail-card">
+                <span>💨 Vento</span>
+                <strong id="wind">-- km/h</strong>
+            </div>
+
+        </section>
+
+        <p id="message" role="status"></p>
+
+        <footer>
+            Dados meteorológicos fornecidos por Open-Meteo
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
